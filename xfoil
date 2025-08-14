@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+if command -v podman &> /dev/null; then
+  ENGINE="podman"
+elif command -v docker &> /dev/null; then
+  ENGINE="docker"
+else
+  echo "Did not find podman or docker. This xfoil wrapper requires one of them."
+  exit 1
+fi
+
+$ENGINE run --rm -it \
+  -v $PWD:/tmp/work:rw \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env=DISPLAY \
+  ghcr.io/otterworks/xfoil "$@"
