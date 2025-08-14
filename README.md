@@ -6,6 +6,21 @@ tools before downloading the source from the [official link][tgz].
 It then applies a patch to select appropriate compiler flags and adjust file
 paths before compiling `xfoil` and its companion programs.
 
+## quick-start
+You do not need to clone this repository to use `xfoil`,
+you only need the container.
+If you use the convenience wrapper from somewhere in your `$PATH`,
+then `podman` or `docker` will take care of the rest for you.
+
+```
+curl -#SLO --output-dir $HOME/.local/bin https://raw.githubusercontent.com/otterworks/xfoil-container/refs/heads/main/xfoil
+cat $HOME/.local/bin/xfoil # *always* inspect a script from the internet before executing it
+chmod +x $HOME/.local/bin/xfoil
+xfoil
+```
+
+## running with other options
+
 You should be able to get the container image with:
 ```
 podman image pull ghcr.io/otterworks/xfoil
