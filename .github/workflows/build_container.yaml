@@ -5,9 +5,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     env:
-      IMAGE_NAME: xfoil
+      IMAGE_NAME: ${GITHUB_REPOSITORY_OWNER}/xfoil
       REGISTRY: ghcr.io
 
     steps:
