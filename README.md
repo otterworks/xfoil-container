@@ -22,5 +22,13 @@ podman run --rm
 ```
 
 _____________
+This container was inspired somewhat by `docker-xfoil` by [thomaseizinger] & its fork by [rtcameron].
+I've started over with a newer, smaller base image^[Here we use Debian-slim instead of Ubuntu 18.04.],
+avoided compiling & running `osgen` entirely, and patched the `Makefile`s a bit 
+differently^[One of the changes separates `make` from `make install`, for a more familiar experience.]. 
+_____________
 [XFOIL]: https://web.mit.edu/drela/Public/web/xfoil/
 [tgz]: https://web.mit.edu/drela/Public/web/xfoil/xfoil6.99.tgz
+
+[thomaseizinger]: https://github.com/thomaseizinger/docker-xfoil
+[rtcameron]: https://github.com/rtcameron/docker-xfoil
