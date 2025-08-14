@@ -1,5 +1,4 @@
 FROM alpine as builder
-MAINTAINER https://github.com/otterworks/xfoil-container/issues
 
 ARG TGZ_URL=https://web.mit.edu/drela/Public/web/xfoil/xfoil6.99.tgz
 
@@ -18,6 +17,8 @@ WORKDIR /tmp/Xfoil/bin
 RUN make -f Makefile_gfortran all
 
 FROM alpine as runner
+
+LABEL org.opencontainers.image.source="https://github.com/otterworks/xfoil-container"
 
 RUN apk add --no-cache libgfortran libx11
 
