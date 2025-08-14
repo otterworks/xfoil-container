@@ -13,7 +13,7 @@ podman image pull ghcr.io/otterworks/xfoil
 ```
 and then you can run an interactive session with graphics support:
 ```
-podman run --rm
+podman run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env=DISPLAY ghcr.io/otterworks/xfoil
 ```
 Alternatively, `example.sh` illustrates a scripted session with file IO
 (without graphics). It boils down to:
