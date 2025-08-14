@@ -21,6 +21,30 @@ cat input.xfoil
 podman run --rm -v $PWD:/tmp/work:rw ghcr.io/otterworks/xfoil < input.xfoil | tee -a output.xfoil
 open plot.ps
 ```
+
+## troubleshooting
+
+### X authorization
+
+> When I run with graphics enabled, the first operating point I try to analyze causes `xfoil` to abort.
+
+It looks something like this:
+```
+.OPERi   c>  ALFA 4
+ Calculating unit vorticity distributions ...
+Authorization required, but no authorization protocol specified
+
+ Cannot open display...aborting
+
+```
+
+The problem is that the current user is not authorized for the X display/socket. The solution is to run:
+```
+xhost +local:$(whoami)
+```
+and run the container again.
+
+## endmatter
 _____________
 This container was inspired somewhat by `docker-xfoil` by [thomaseizinger] & its fork by [rtcameron].
 I've started over with a newer, smaller base image[^b], avoided compiling & running `osgen` entirely,
