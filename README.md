@@ -18,11 +18,9 @@ podman run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env=DISPLAY ghcr.io/ot
 Alternatively, `input.xfoil` demonstrates a scripted session with file IO
 (without graphics). The workflow boils down to:
 ```
-pushd example
 cat input.xfoil
 podman run --rm -v $PWD:/tmp/work:rw ghcr.io/otterworks/xfoil < input.xfoil | tee -a output.xfoil
 open plot.ps
-popd
 ```
 _____________
 This container was inspired somewhat by `docker-xfoil` by [thomaseizinger] & its fork by [rtcameron].
