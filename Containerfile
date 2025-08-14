@@ -27,4 +27,5 @@ RUN make -f Makefile_gfortran all
 RUN make -f Makefile_gfortran install
 # ^This last line^ is where you would use `sudo` as a normal user outside a container.
 
+WORKDIR /tmp/work
 CMD xfoil
