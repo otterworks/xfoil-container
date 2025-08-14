@@ -13,8 +13,7 @@ RUN apt-get update \
       patch \
  && apt-get autoremove --yes && apt-get clean
 
-WORKDIR /tmp
-RUN curl -#SL $TGZ_URL | tar -xzv
+RUN curl -#SL $TGZ_URL | tar --no-same-owner --no-same-permissions -C /tmp -xzv
 WORKDIR /tmp/Xfoil
 
 COPY Makefile.patch .
