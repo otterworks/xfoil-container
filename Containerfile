@@ -1,4 +1,4 @@
-FROM debian:trixie-slim
+FROM debian:trixie-slim as builder
 MAINTAINER https://github.com/otterworks/xfoil-container/issues
 
 ARG TGZ_URL=https://web.mit.edu/drela/Public/web/xfoil/xfoil6.99.tgz
@@ -10,8 +10,7 @@ RUN apt-get update \
       curl \
       gfortran \
       libx11-dev \
-      patch \
- && apt-get autoremove --yes && apt-get clean
+      patch
 
 RUN curl -#SL $TGZ_URL | tar --no-same-owner --no-same-permissions -C /tmp -xzv
 WORKDIR /tmp/Xfoil
@@ -24,8 +23,20 @@ RUN make
 
 WORKDIR /tmp/Xfoil/bin
 RUN make -f Makefile_gfortran all
-RUN make -f Makefile_gfortran install
-# ^This last line^ is where you would use `sudo` as a normal user outside a container.
 
+FROM debian:trixie-slim as runner
+
+RUN apt-get update \
+ && apt-get install --yes --no-install-recommends \
+      libgfortran5 \
+      libx11-6 \
+ && apt-get autoremove --yes && apt-get clean
+
+COPY --from=builder \
+  /tmp/Xfoil/bin/xfoil \
+  /tmp/Xfoil/bin/pplot \
+  /tmp/Xfoil/bin/pxplot \
+  /usr/local/bin/
 WORKDIR /tmp/work
+
 CMD xfoil
