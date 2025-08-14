@@ -1,6 +1,6 @@
-diff -Naur -x '*.o' -x '*.a' a/bin/Makefile_gfortran b/bin/Makefile_gfortran
---- a/bin/Makefile_gfortran	2012-03-06 21:33:23.000000000 -0800
-+++ b/bin/Makefile_gfortran	2025-08-13 16:16:04.003477274 -0700
+diff -Naur -x '*.o' -x '*.a' -x '*.orig' -x '*.patch' -x '*.bl' -x '*.ps' -x '*.dat' /tmp/Xfoil/bin/Makefile_gfortran ./bin/Makefile_gfortran
+--- /tmp/Xfoil/bin/Makefile_gfortran	2012-03-06 21:33:23.000000000 -0800
++++ ./bin/Makefile_gfortran	2025-08-14 14:09:08.063420842 -0700
 @@ -6,7 +6,7 @@
  
  
@@ -16,7 +16,7 @@ diff -Naur -x '*.o' -x '*.a' a/bin/Makefile_gfortran b/bin/Makefile_gfortran
  DBL = -fdefault-real-8
 -FFLAGS = -O $(CHK) $(DBL)
 -FFLOPT = -O $(CHK) $(DBL)
-+LEGACY = -fallow-argument-mismatch
++LEGACY = -fallow-argument-mismatch -std=legacy
 +FFLAGS = -O $(CHK) $(DBL) $(LEGACY)
 +FFLOPT = -O $(CHK) $(DBL) $(LEGACY)
  FTNLIB =
@@ -42,9 +42,9 @@ diff -Naur -x '*.o' -x '*.a' a/bin/Makefile_gfortran b/bin/Makefile_gfortran
  
  
  blu.o: $(SRC)/blu.f
-diff -Naur -x '*.o' -x '*.a' a/plotlib/Makefile b/plotlib/Makefile
---- a/plotlib/Makefile	2012-12-16 20:10:15.000000000 -0800
-+++ b/plotlib/Makefile	2025-08-13 16:23:35.622567480 -0700
+diff -Naur -x '*.o' -x '*.a' -x '*.orig' -x '*.patch' -x '*.bl' -x '*.ps' -x '*.dat' /tmp/Xfoil/plotlib/Makefile ./plotlib/Makefile
+--- /tmp/Xfoil/plotlib/Makefile	2012-12-16 20:10:15.000000000 -0800
++++ ./plotlib/Makefile	2025-08-13 16:59:01.217009312 -0700
 @@ -68,7 +68,7 @@
  
  ###-------------------------------------------------------------------------
