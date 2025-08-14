@@ -67,11 +67,12 @@ and patched the `Makefile`s a bit differently[^m].
 _____________
 
 [^b]: Here we use alpine instead of Ubuntu 18.04 (LTS). With the [multi-stage build][multi-stage], this produces an image that is only 17.3 MB.
-[^m]: One of the changes separates `make` from `make install`, for a more familiar experience. I may try migrating all the `Makefile`s to autotools or CMake sometime later.
+[^m]: One of the changes separates `make` from `make install`, for a more familiar experience. I may try migrating all the `Makefile`s to autotools or CMake sometime later. (Actually, it looks like [someone has already packaged Xfoil 6.97 with CMake][robotlocomotion],so I could fork from that if I wanted.)
 _____________
 [XFOIL]: https://web.mit.edu/drela/Public/web/xfoil/
 [tgz]: https://web.mit.edu/drela/Public/web/xfoil/xfoil6.99.tgz
 
 [thomaseizinger]: https://github.com/thomaseizinger/docker-xfoil
 [rtcameron]: https://github.com/rtcameron/docker-xfoil
+[robotlocomotion]: https://github.com/RobotLocomotion/xfoil
 [multi-stage]: https://blog.lazkani.io/posts/multi-stage-docker-container-build/
