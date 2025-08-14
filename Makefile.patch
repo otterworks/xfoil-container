@@ -1,0 +1,56 @@
+diff -Naur -x '*.o' -x '*.a' a/bin/Makefile_gfortran b/bin/Makefile_gfortran
+--- a/bin/Makefile_gfortran	2012-03-06 21:33:23.000000000 -0800
++++ b/bin/Makefile_gfortran	2025-08-13 16:16:04.003477274 -0700
+@@ -6,7 +6,7 @@
+ 
+ 
+ SHELL = sh
+-BINDIR = /home/codes/bin/
++BINDIR = /usr/local/bin/
+ #BINDIR = .
+ 
+ PROGS = xfoil pplot pxplot
+@@ -119,8 +119,9 @@
+ CHK = 
+ #CHK = -fbounds-check -finit-real=inf -ffpe-trap=invalid,zero,denormal
+ DBL = -fdefault-real-8
+-FFLAGS = -O $(CHK) $(DBL)
+-FFLOPT = -O $(CHK) $(DBL)
++LEGACY = -fallow-argument-mismatch
++FFLAGS = -O $(CHK) $(DBL) $(LEGACY)
++FFLOPT = -O $(CHK) $(DBL) $(LEGACY)
+ FTNLIB =
+ 
+ PLTOBJ = ../plotlib/libPlt_gDP.a 
+@@ -141,19 +142,15 @@
+ 
+ xfoil: $(XFOILOBJ) $(XUTILOBJ) $(OSOBJ)
+ 	$(FC) -o xfoil $(XFOILOBJ) $(XUTILOBJ) $(OSOBJ) $(PLTOBJ) $(PLTLIB) $(FTNLIB)
+-	$(INSTALLCMD) xfoil $(BINDIR)
+ 
+ pxplot:	$(PXPLOTOBJ) $(XUTILOBJ)
+ 	$(FC) -o pxplot $(PXPLOTOBJ) $(XUTILOBJ) $(PLTOBJ) $(PLTLIB) $(FTNLIB)
+-	$(INSTALLCMD) pxplot $(BINDIR)
+ 
+ pplot:	$(PPLOTOBJ) $(XUTILOBJ)
+ 	$(FC) -o pplot $(PPLOTOBJ) $(XUTILOBJ)  $(PLTOBJ) $(PLTLIB) $(FTNLIB)
+-	$(INSTALLCMD) pplot $(BINDIR)
+ 
+ blu: blu.o profil.o
+ 	$(FC) -o blu blu.o profil.o
+-	$(INSTALLCMD) blu $(BINDIR)
+ 
+ 
+ blu.o: $(SRC)/blu.f
+diff -Naur -x '*.o' -x '*.a' a/plotlib/Makefile b/plotlib/Makefile
+--- a/plotlib/Makefile	2012-12-16 20:10:15.000000000 -0800
++++ b/plotlib/Makefile	2025-08-13 16:23:35.622567480 -0700
+@@ -68,7 +68,7 @@
+ 
+ ###-------------------------------------------------------------------------
+ ### Set compiler, compiler flags, name of output object library
+-include ./config.make
++include ./config.make.gfortranDP
+ 
+ 
+ ###-------------------------------------------------------------------------
